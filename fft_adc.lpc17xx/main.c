@@ -35,7 +35,7 @@ int main(void)
 
 	printf("\n\r-------------------------\n\r"); //print a line
 	
-	for(i = 1; i < 65; i+=1) //Display the first 64 values, don't include DC.
+	for(i = 1; i < 74; i+=1) //Display the first 64 values, don't include DC.
 	{
 		magnitude = (int)sqrt((pow(fft_out[2 * i], 2) + pow(fft_out[(2 * i) + 1], 2))); // m = sqrt(a^2 + b^2)
 		
@@ -52,6 +52,6 @@ int main(void)
 	}
 	
 	
-		delay_ms(100); //Slow down the update rate, otherwise the console can't display fast enough.
+		delay_ms(50); //Slow down the update rate, otherwise the console can't display fast enough.
 	}
 }
