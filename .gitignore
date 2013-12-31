@@ -2,3 +2,15 @@
 .DS_Store
 
 nRF24L01.lpc17xx/.dep/main.o.d
+
+nRF24L01.lpc17xx/main.lst
+
+*.o
+
+*.elf
+
+*.bin
+
+*.lss
+
+*.map

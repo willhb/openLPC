@@ -33,7 +33,7 @@ int spi_move(unsigned int data){
 	
 }
 
-int write_reg(int regAddress, char *data, int numBytes){
+int write_reg(int regAddress,unsigned char *data, int numBytes){
 	
 	unsigned int count = 0;
 	
@@ -52,7 +52,7 @@ int write_reg(int regAddress, char *data, int numBytes){
 	return 0;
 }
 
-int write_payload(char *data, int numBytes){
+int write_payload(unsigned char *data, int numBytes){
 	
 	unsigned int count = 0;
 	
@@ -71,7 +71,7 @@ int write_payload(char *data, int numBytes){
 	return 0;
 }
 
-int read_payload(char *data, int numBytes){
+int read_payload(unsigned char *data, int numBytes){
 	
 	unsigned int count = 0;
 	
@@ -90,7 +90,7 @@ int read_payload(char *data, int numBytes){
 	return 0;
 }
 
-int read_reg(int regAddress, char *data, int numBytes){
+int read_reg(int regAddress,unsigned char *data, int numBytes){
 	
 	unsigned int count = 0;
 	
@@ -193,7 +193,7 @@ int main()
 						cmdList[cmdCnt] = c; //store the start of a word
 					}
 					
-					if((command[c+1] == ' ' || command[c+1] == NULL) && (command[c] >= '0' && command[c] <= 'z')){
+					if((command[c+1] == ' ' || command[c+1] == '\0') && (command[c] >= '0' && command[c] <= 'z')){
 						cmdLengthList[cmdCnt] = c - cmdList[cmdCnt] + 1; //store the legnth of the word
 						cmdCnt++;
 					}
