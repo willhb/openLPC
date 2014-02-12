@@ -2,6 +2,8 @@
 import time;  
 import serial;
 
+#Send "o\n" to trigger the MCU to send a power on command.
+
 ser = serial.Serial('/dev/tty.usbmodem1a1221')
 
 alarmMin = 1
