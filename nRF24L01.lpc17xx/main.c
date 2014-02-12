@@ -1,3 +1,12 @@
+/*command interface
+*
+*	register read|write address numBytes [data (lsb first) 	--- writes or reads n bytes from address
+*	payload	read|write numBytes [data]						--- writes or reads n bytes from the radio
+*	flush tx|rx												--- flushes the tx or rx  FIFO
+*	reuse													--- reuse last tx payload until a flush tx
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,10 +35,10 @@
 
 int spi_move(unsigned int data){
 	
-	while(LPC_SSP1->SR & (1<<3)){} //block if the write FIFO is full.
-	LPC_SSP1->DR = (data); //write only 8 bits of data.
-	while(LPC_SSP1->SR & (1<<4)){} //block if busy
-	return LPC_SSP1->DR;
+	while(LPC_SSP1->SR & (1<<3)){} 	//block if the SSP write FIFO is full.
+	LPC_SSP1->DR = (data); 			//write the data
+	while(LPC_SSP1->SR & (1<<4)){} 	//block if busy
+	return LPC_SSP1->DR;			//read and return the data
 	
 }
 
@@ -169,7 +178,7 @@ int main()
 		printf("Enter Command:");
 		
 		fgets(command, CMD_MAX, stdin);
-		while ((c=getchar()) != EOF && c != '\n'); //flush STDIN
+		while ((c=getchar()) != EOF && c != '\n'); //flush stdin
 		remove_newline(command);
 		
 		
@@ -206,17 +215,6 @@ int main()
 			for(c=0;c<cmdCnt;c++){
 				*(command + cmdList[c] + cmdLengthList[c]) = (unsigned int)NULL;
 			}
-			
-			/*command interface
-			*
-			*	register read|write address numBytes [data (lsb first) 	--- writes or reads n bytes from address
-			*	payload	read|write numBytes [data]						--- writes or reads n bytes from the radio
-			*	flush tx|rx												--- flushes the tx or rx  FIFO
-			*	reuse													--- reuse last tx payload until a flush tx
-			*
-			*/
-			
-			//cover each command
 			
 			char *endptr;
 			
