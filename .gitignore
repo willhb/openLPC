@@ -18,5 +18,3 @@ nRF24L01.lpc17xx/main.lst
 *.d
 
 *.lst
-
-*.inc
